@@ -18,7 +18,7 @@ router.get('/getl1/:id',async(req,res)=>{
     try {
         const buidis=req.params.id
        
-        const [result,fields]=await connection.execute(`select * from L1_Capabilities where buid="${buidis}"`)
+        const [result,fields]=await connection.execute(`select * from L1_Capabilities where buid="${buidis}" order by ctype`)
         res.setHeader('Access-Control-Allow-Origin',"*")
         res.send(result)
     } catch (error) {
