@@ -8,6 +8,7 @@ const route1=require('./route/getroute')
 const l1route=require('./route/l1route')
 const l2route=require('./route/l2route')
 const l3route=require('./route/l3route')
+const approute=require('./route/approute')
 const cors=require("cors")
 
 const app = express()
@@ -17,6 +18,7 @@ app.use(route1)
 app.use(l1route)
 app.use(l2route)
 app.use(l3route)
+app.use(approute)
 
 
 app.use(express.json())

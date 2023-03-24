@@ -3,8 +3,8 @@ const queryarray=[
     `create table IF NOT EXISTS L1_Capabilities ( l1id integer auto_increment, l1name varchar(256) NOT NULL,BUid integer not null,ctype varchar(256) NOT NULL,UNIQUE (l1name ,BUid,ctype) ,primary key(l1id) ,foreign key (BUid) references BU(buid)) ;`,
     `create table if not exists L2_Capabilities( l2id integer auto_increment, l2name varchar(256) not null, BUid integer not null,parentid integer not null, ctype varchar(256) NOT NULL,unique(l2name,BUid,ctype,parentid), primary key(l2id), foreign key (parentid) references L1_Capabilities(l1id) ,foreign key (BUid) references BU(buid));`,
     `create table if not exists L3_Capabilities( l3id integer auto_increment, l3name varchar(256) not null, BUid integer not null,parentid integer not null, ctype varchar(256) NOT NULL,unique(l3name,BUid,ctype,parentid), primary key(l3id), foreign key (parentid) references L2_Capabilities(l2id),foreign key (BUid) references BU(buid) );`,
-    
-    // `create table if not exists applications( appid integer auto_increment not null, appname varchar(256) not null , buid integer not null, apmid integer not null, unique(apmid,appname), primary key(appid), foreign key (buid) references bu(buid) );`
+    `create table if not exists applications( appid integer not null, appname varchar(256) not null , buid integer not null, unique(appid,appname), primary key(appid), foreign key (buid) references bu(buid) );`,
+    `create table if not exists capappmaping ( id int not null auto_increment , l1id int not null, l2id int not null, l3id int not null, buid int not null, appid int not null, appnameinmaping varchar(256) not null, primary key(id), foreign key (l1id) references L1_Capabilities(l1id), foreign key (l2id) references L2_Capabilities(l2id), foreign key (l3id) references L3_Capabilities(l3id), foreign key (buid) references bu(buid),foreign key (appid) references applications(appid) );`
 ]
 
 module.exports=queryarray
